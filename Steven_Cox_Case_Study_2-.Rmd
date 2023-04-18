@@ -346,13 +346,13 @@ q1 <- quantile(df$MonthlyIncome, 0.25)
 q2 <- quantile(df$MonthlyIncome, 0.5)
 q3 <- quantile(df$MonthlyIncome, 0.75)
 
-# Create factor levels based on quartiles
-df$MonthlyIncomeCategory <- cut(df$MonthlyIncome, 
-                                 breaks = c(-Inf, q1, q2, q3, Inf), 
-                                 labels = c("Low", "Medium", "High", 
-                                            "Very High"))
-# Convert to factor
-df$MonthlyIncomeCategory <- factor(df$MonthlyIncomeCategory)
+# # Create factor levels based on quartiles
+# df$MonthlyIncomeCategory <- cut(df$MonthlyIncome, 
+#                                  breaks = c(-Inf, q1, q2, q3, Inf), 
+#                                  labels = c("Low", "Medium", "High", 
+#                                             "Very High"))
+# # Convert to factor
+# df$MonthlyIncomeCategory <- factor(df$MonthlyIncomeCategory)
 ```
 
 #Preparing the data set for modeling
@@ -592,7 +592,7 @@ lrModel <- train(MonthlyIncome_log ~ .,
 saveRDS(lrModel, "Models/LinReg.rds")
 
 summary(lrModel)
-defaultSummary(data.frame(pred = predict(lrModel, dfmodel_sub), obs = dfmodel_sub$MonthlyIncome_log))
+defaultSummary(data.frame(pred = predict(lrModel, df_train), obs = df_train$MonthlyIncome_log))
 varImp(lrModel, scale = TRUE)
 
 # Plot the model
